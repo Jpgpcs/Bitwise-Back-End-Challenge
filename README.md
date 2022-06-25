@@ -5,7 +5,7 @@ CRUD Restful API with data mapping from GitHub API, authentication and automated
 This API does:
 
 - Perform the user registration:
- - A endpoint to register the user with the entity information below and get a token to access others routes
+  - A endpoint to register the user with the entity information below and get a token to access others routes
 
 - Perform the user registration with GitHub:
  - A endpoint to register the user passing only the GitHub username ( mapping data from GitHub API to this API ) and get a token to access others routes
