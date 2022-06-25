@@ -16,6 +16,10 @@ const cors = require("cors")
 const xss = require("xss-clean")
 const rateLimiter = require("express-rate-limit")
 
+const swaggerUI = require("swagger-ui-express")
+const yaml = require("yamljs")
+const swaggerDocument = yaml.load("./swagger.yaml")
+
 app.set('trust proxy', 1)
 app.use(rateLimiter({
 	windowMs: 15 * 60 * 1000,
@@ -26,10 +30,12 @@ app.use(rateLimiter({
 app.use(express.json())
 app.use(helmet())
 app.use(cors())
+app.use(xss())
 
 app.get("/", (req, res)=>{
-	res.send("ON")
+	res.send("<h1>Bitwise Restfull CRUD</h1><a href='/api-docs'>Documentation</a>")
 })
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
 app.use("/api/v1/authentication", authRouter)
 app.use("/api/v1/users", authMiddleware, usersRouter)

@@ -35,7 +35,6 @@ describe("auth routes", ()=>{
                     gender: "Male"
                 }
                 const response = await request(app).post("/api/v1/authentication/register").send(testUser)
-                console.log(response)
                 const {user, token} = response.body
                 expect(response.status).toBe(201)
                 expect(user._id).toBeTruthy()

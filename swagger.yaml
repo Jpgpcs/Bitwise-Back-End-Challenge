@@ -1,0 +1,263 @@
+openapi: 3.0.0
+info:
+  title: Bitwise CRUD Restfull Api
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://crud-restfull-api-bitwise.herokuapp.com/api/v1
+  variables: {}
+paths:
+  /authentication/register_with_github:
+    post:
+      tags:
+      - Auth
+      summary: Register user with GitHub
+      operationId: RegisteruserwithGitHub
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisteruserwithGitHubRequest'
+            example:
+              username: yourGitHubUsername
+              password: yourPassword
+              email: your@email.com
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /authentication/register:
+    post:
+      tags:
+      - Auth
+      summary: Register user
+      operationId: Registeruser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisteruserRequest'
+            example:
+              username: yourUsername
+              password: yourPassword
+              name: yourName
+              lastName: yourLastName
+              profileImageUrl: https://yourProfile.ImageUrl.com/u/2?v=4
+              bio: yourBio
+              email: your@email.com
+              gender: Male
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /authentication/login:
+    post:
+      tags:
+      - Auth
+      summary: Login user
+      operationId: Loginuser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginuserRequest'
+            example:
+              username: yourUsername
+              password: yourPassword
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /users/{username}:
+    parameters:
+      - in: path
+        name: username
+        schema:
+          type: string
+        required: true
+        description: The user username
+    get:
+      tags:
+      - Users
+      summary: Get user
+      operationId: Getuser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    patch:
+      tags:
+      - Users
+      summary: Patch user
+      operationId: Patchuser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchuserRequest'
+            example:
+              username: yourUsernameToUpdate
+              password: yourPasswordToUpdate
+              name: yourNameToUpdate
+              lastName: yourLastNameToUpdate
+              profileImageUrl: https://yourProfile.ImageUrlToUpdate.com/u/2?v=4
+              bio: yourBioToUpdate
+              email: your@emailToUpdate.com
+              gender: Female
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+      - Users
+      summary: Delete user
+      operationId: Deleteuser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    RegisteruserwithGitHubRequest:
+      title: RegisteruserwithGitHubRequest
+      required:
+      - username
+      - password
+      - email
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+      example:
+        username: yourGitHubUsername
+        password: yourPassword
+        email: your@email.com
+    RegisteruserRequest:
+      title: RegisteruserRequest
+      required:
+      - username
+      - password
+      - name
+      - lastName
+      - profileImageUrl
+      - bio
+      - email
+      - gender
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
+        lastName:
+          type: string
+        profileImageUrl:
+          type: string
+        bio:
+          type: string
+        email:
+          type: string
+        gender:
+          type: string
+      example:
+        username: yourUsername
+        password: yourPassword
+        name: yourName
+        lastName: yourLastName
+        profileImageUrl: https://yourProfile.ImageUrl.com/u/2?v=4
+        bio: yourBio
+        email: your@email.com
+        gender: Male
+    LoginuserRequest:
+      title: LoginuserRequest
+      required:
+      - username
+      - password
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      example:
+        username: yourUsername
+        password: yourPassword
+    PatchuserRequest:
+      title: PatchuserRequest
+      required:
+      - username
+      - password
+      - name
+      - lastName
+      - profileImageUrl
+      - bio
+      - email
+      - gender
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
+        lastName:
+          type: string
+        profileImageUrl:
+          type: string
+        bio:
+          type: string
+        email:
+          type: string
+        gender:
+          type: string
+      example:
+        username: yourUsernameToUpdate
+        password: yourPasswordToUpdate
+        name: yourNameToUpdate
+        lastName: yourLastNameToUpdate
+        profileImageUrl: https://yourProfile.ImageUrlToUpdate.com/u/2?v=4
+        bio: yourBioToUpdate
+        email: your@emailToUpdate.com
+        gender: Female
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+- httpBearer: []
+tags:
+- name: Auth
+  description: ''
+- name: Users
+  description: ''
